@@ -1,5 +1,17 @@
 {
   "HomePage": {
     "title": "Homapage eng"
+  },
+  "RegistrationPage": {
+    "title": "Sign Up",
+    "emailPlaceholder": "Email Address",
+    "emailRequired": "Email Address is required",
+    "passwordPlaceholder": "Password",
+    "passwordRequired": "Password is required",
+    "namePlaceholder": "Name",
+    "nameRequired": "Name is required"
+  },
+  "LoginPage": {
+    "title": "Login"
   }
 }
