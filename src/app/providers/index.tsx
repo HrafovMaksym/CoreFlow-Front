@@ -1,7 +1,12 @@
 import { ReactNode } from "react";
 
 import { IntlProvider } from "./intl-provider";
+import { ModeProvider } from "./theme-provider";
 
 export const MainProvider = ({ children }: { children: ReactNode }) => {
-  return <IntlProvider>{children}</IntlProvider>;
+  return (
+    <ModeProvider>
+      <IntlProvider>{children}</IntlProvider>
+    </ModeProvider>
+  );
 };

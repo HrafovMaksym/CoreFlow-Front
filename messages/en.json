@@ -13,5 +13,9 @@
   },
   "LoginPage": {
     "title": "Login"
+  },
+  "Themes": {
+    "LightTheme": "Light",
+    "DarkTheme": "Dark"
   }
 }
