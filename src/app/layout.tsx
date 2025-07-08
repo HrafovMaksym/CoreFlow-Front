@@ -6,6 +6,7 @@ import { getLocale } from "next-intl/server";
 import { MainProvider } from "./providers";
 
 import "./globals.css";
+import Header from "@/widgets/header/ui/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Header />
         <MainProvider>{children}</MainProvider>
       </body>
     </html>
