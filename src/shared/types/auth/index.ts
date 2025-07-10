@@ -3,3 +3,6 @@ export type RegistrationData = {
   password: string;
   name: string;
 };
+export type RegistrationResponse = {
+  message: string;
+};
