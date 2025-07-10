@@ -1,0 +1,30 @@
+.container {
+  position: relative;
+  z-index: 1;
+  background-color: black;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-image: url("../../../public/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  opacity: var(---bg-img-opacity);
+  z-index: -1;
+}
+.wrapper {
+  display: flex;
+  .formContainer {
+    flex: 1;
+  }
+}
+.imageContainer {
+}

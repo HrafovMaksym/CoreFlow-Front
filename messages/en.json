@@ -9,10 +9,22 @@
     "passwordPlaceholder": "Password",
     "passwordRequired": "Password is required",
     "namePlaceholder": "Name",
-    "nameRequired": "Name is required"
+    "nameRequired": "Name is required",
+    "submit": "Submit",
+    "haveAccount": "Already have an account?",
+    "login": "Log In",
+    "ErrorGlobalMess": "Something went wrong. Please try again."
   },
   "LoginPage": {
-    "title": "Login"
+    "title": "Log In",
+    "emailPlaceholder": "Email Address",
+    "emailRequired": "Email Address is required",
+    "passwordPlaceholder": "Password",
+    "passwordRequired": "Password is required",
+    "forgotPassword": "Forgot password?",
+    "submit": "Submit",
+    "needAccount": "Need an account?",
+    "register": "Sign Up"
   },
   "Themes": {
     "LightTheme": "Light",
