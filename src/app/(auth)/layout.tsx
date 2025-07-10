@@ -8,13 +8,6 @@ export default async function AuthLayout({
 }) {
   return (
     <>
-      {/* <div className={styles.container}>
-        <header className="flex justify-center w-full border-b border-white py-6">
-          <h1 className="text-3xl text-white">CoreFlow</h1>
-        </header>
-        <ThemeSwitcher />
-        {children}
-      </div> */}
       <header className="flex justify-center w-full border-b border-white py-6">
         <h1 className="text-3xl text-white">CoreFlow</h1>
         <ThemeSwitcher />
