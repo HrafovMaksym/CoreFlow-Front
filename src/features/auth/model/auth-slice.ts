@@ -1,5 +1,10 @@
 import { authApi } from "@/shared/api/auth-api";
-import { RegistrationData, RegistrationResponse } from "@/shared/types/auth";
+import {
+  LoginData,
+  LoginResponse,
+  RegistrationData,
+  RegistrationResponse,
+} from "@/shared/types/auth";
 import { Status } from "@/shared/types/redux";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
@@ -39,7 +44,21 @@ export const registration = createAsyncThunk<
     }
   }
 );
+export const login = createAsyncThunk<
+  LoginResponse,
+  LoginData,
+  { rejectValue: string }
+>("auth/login", async ({ email, password }: LoginData, thunkAPI) => {
+  try {
+    const { data } = await authApi.login({ email, password });
 
+    return data;
+  } catch (err) {
+    const error = err as AxiosError<{ message: string; status: number }>;
+    const message = error.response?.data?.message || "Login failed";
+    return thunkAPI.rejectWithValue(message);
+  }
+});
 const authSlice = createSlice({
   name: "auth",
   initialState,

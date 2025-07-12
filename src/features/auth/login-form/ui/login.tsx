@@ -1,25 +1,48 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import styles from "./login-styles.module.scss";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useTranslations } from "next-intl";
 
-import { RegistrationData } from "@/shared/types/auth";
 import { InputForm } from "@/shared/ui/input-form";
 import { Devider } from "@/shared/ui/devider";
+import { LoginFormData, loginSchema } from "../../model/validation";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useAppDispatch } from "@/shared/lib/hooks/redux-hook";
+
+import { login } from "../../model/auth-slice";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+  const t = useTranslations("LoginPage");
+
+  const dispatch = useAppDispatch();
+
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegistrationData>();
+  } = useForm<LoginFormData>({
+    resolver: yupResolver(loginSchema),
+  });
 
-  const t = useTranslations("LoginPage");
-
-  const onSubmit: SubmitHandler<RegistrationData> = (data) => console.log(data);
+  const [error, setError] = useState("");
+  const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
+    try {
+      const result = await dispatch(login(data)).unwrap();
+      if (result.message === "User login successfully") {
+        router.push("/");
+      } else {
+        throw new Error();
+      }
+    } catch (err: unknown) {
+      const error = err as string;
+      setError(error || t("ErrorGlobalMess"));
+    }
+  };
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -45,6 +68,7 @@ const LoginForm = () => {
             {t("forgotPassword")}
           </Link>
         </div>
+        {error && <p className={styles.error}>{error}</p>}
         <button className={styles.submit} type="submit">
           {t("submit")}
         </button>
@@ -52,7 +76,7 @@ const LoginForm = () => {
 
         <div className={styles.linkContainer}>
           <span>{t("needAccount")}</span>
-          <Link href={"/login"}>{t("register")}</Link>
+          <Link href={"/registration"}>{t("register")}</Link>
         </div>
       </form>
     </div>

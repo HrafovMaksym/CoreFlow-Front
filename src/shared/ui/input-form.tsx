@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { RegistrationData } from "../types/auth";
 import { FieldErrors, UseFormRegisterReturn } from "react-hook-form";
 import { Eye, EyeOff } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type InputProps = {
   label: string;
@@ -20,6 +21,7 @@ export const InputForm = ({
   register,
   errorType,
 }: InputProps) => {
+  const t = useTranslations("ValidationMessages");
   const [isVisible, setIsVisible] = useState(false);
 
   const inputType =
@@ -27,7 +29,7 @@ export const InputForm = ({
 
   const isError = Boolean(errors[errorType]);
 
-  const errorMessage = errors[errorType]?.message;
+  const errorMessage = t(String(errors[errorType]?.message));
 
   return (
     <div className="relative w-full">

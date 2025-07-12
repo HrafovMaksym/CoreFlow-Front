@@ -6,3 +6,10 @@ export type RegistrationData = {
 export type RegistrationResponse = {
   message: string;
 };
+export type LoginData = {
+  email: string;
+  password: string;
+};
+export type LoginResponse = {
+  message: string;
+};

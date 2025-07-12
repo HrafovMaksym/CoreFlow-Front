@@ -20,6 +20,8 @@
   margin-bottom: 10px;
 }
 .submit {
+  display: flex;
+  justify-content: center;
   background-color: var(--controlls-bg);
   color: var(--btn-text);
   width: 100%;
@@ -44,7 +46,9 @@
   opacity: 0.8;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+
   &:hover {
+    text-decoration: underline;
     opacity: 1;
   }
 }
@@ -68,4 +72,7 @@
       opacity: 1;
     }
   }
+}
+.error {
+  color: rgb(246, 48, 48);
 }

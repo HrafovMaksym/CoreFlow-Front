@@ -6,12 +6,17 @@ import styles from "./registration-styles.module.scss";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useTranslations } from "next-intl";
 
-import { RegistrationData } from "@/shared/types/auth";
 import { InputForm } from "@/shared/ui/input-form";
 import { Devider } from "@/shared/ui/devider";
 import { useAppDispatch } from "@/shared/lib/hooks/redux-hook";
 import { registration } from "../../model/auth-slice";
 import { useRouter } from "next/navigation";
+import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  RegistrationFormData,
+  registrationSchema,
+} from "../../model/validation";
+import { LoaderCircle } from "lucide-react";
 
 const RegistrationForm = () => {
   const t = useTranslations("RegistrationPage");
@@ -24,12 +29,16 @@ const RegistrationForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegistrationData>();
+  } = useForm<RegistrationFormData>({
+    resolver: yupResolver(registrationSchema),
+  });
 
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit: SubmitHandler<RegistrationData> = async (data) => {
+  const onSubmit: SubmitHandler<RegistrationFormData> = async (data) => {
     try {
+      setIsLoading(true);
       const result = await dispatch(registration(data)).unwrap();
       if (result.message === "User created successfully") {
         router.push("/");
@@ -39,6 +48,8 @@ const RegistrationForm = () => {
     } catch (err: unknown) {
       const error = err as string;
       setError(error || t("ErrorGlobalMess"));
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -49,7 +60,7 @@ const RegistrationForm = () => {
           label="Name"
           type="text"
           placeholder={t("namePlaceholder")}
-          register={register("name", { required: t("nameRequired") })}
+          register={register("name")}
           errorType="name"
           errors={errors}
         />
@@ -57,7 +68,7 @@ const RegistrationForm = () => {
           label="Email"
           type="email"
           placeholder={t("emailPlaceholder")}
-          register={register("email", { required: t("emailRequired") })}
+          register={register("email")}
           errorType="email"
           errors={errors}
         />
@@ -65,13 +76,17 @@ const RegistrationForm = () => {
           label="Password"
           type="password"
           placeholder={t("passwordPlaceholder")}
-          register={register("password", { required: t("passwordRequired") })}
+          register={register("password")}
           errorType="password"
           errors={errors}
         />{" "}
         {error && <p className={styles.error}>{error}</p>}
         <button className={styles.submit} type="submit">
-          {t("submit")}
+          {isLoading ? (
+            <LoaderCircle size={20} className="animate-spin " />
+          ) : (
+            t("submit")
+          )}
         </button>
         <Devider />
         <div className={styles.linkContainer}>
