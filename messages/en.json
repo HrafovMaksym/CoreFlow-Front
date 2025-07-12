@@ -4,12 +4,9 @@
   },
   "RegistrationPage": {
     "title": "Sign Up",
+    "namePlaceholder": "Nickname",
     "emailPlaceholder": "Email Address",
-    "emailRequired": "Email Address is required",
     "passwordPlaceholder": "Password",
-    "passwordRequired": "Password is required",
-    "namePlaceholder": "Name",
-    "nameRequired": "Name is required",
     "submit": "Submit",
     "haveAccount": "Already have an account?",
     "login": "Log In",
@@ -18,13 +15,23 @@
   "LoginPage": {
     "title": "Log In",
     "emailPlaceholder": "Email Address",
-    "emailRequired": "Email Address is required",
     "passwordPlaceholder": "Password",
-    "passwordRequired": "Password is required",
     "forgotPassword": "Forgot password?",
     "submit": "Submit",
     "needAccount": "Need an account?",
-    "register": "Sign Up"
+    "register": "Sign Up",
+    "ErrorGlobalMess": "Something went wrong. Please try again."
+  },
+  "ValidationMessages": {
+    "nameRequired": "Nickname is required",
+    "nameMin": "Nickname must be at least 6 characters",
+    "nameMax": "Nickname must be at most 20 characters",
+    "emailRequired": "Email Address is required",
+    "emailInvalid": "Invalid email",
+    "emailDomainNotAllowed": "Email domain is not allowed",
+    "passwordRequired": "Password is required",
+    "passwordMin": "Password must be at least 6 characters",
+    "passwordMax": "Password must be at most 20 characters"
   },
   "Themes": {
     "LightTheme": "Light",

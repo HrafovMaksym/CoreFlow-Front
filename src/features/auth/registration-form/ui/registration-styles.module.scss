@@ -20,6 +20,8 @@
   margin-bottom: 10px;
 }
 .submit {
+  display: flex;
+  justify-content: center;
   background-color: var(--controlls-bg);
   color: var(--btn-text);
   width: 100%;

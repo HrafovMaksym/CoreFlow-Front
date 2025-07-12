@@ -5,4 +5,8 @@ export const authApi = {
     api.post("auth/registration", data, {
       withCredentials: true,
     }),
+  login: (data: { email: string; password: string }) =>
+    api.post("auth/login", data, {
+      withCredentials: true,
+    }),
 };

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import styles from "./auth-styles.module.scss";
-import ThemeSwitcher from "@/features/theme/ui/theme-switcher";
+
 export default async function AuthLayout({
   children,
 }: {
@@ -8,9 +8,8 @@ export default async function AuthLayout({
 }) {
   return (
     <>
-      <header className="flex justify-center w-full border-b border-white py-6">
-        <h1 className="text-3xl text-white">CoreFlow</h1>
-        <ThemeSwitcher />
+      <header className={styles.header}>
+        <h1>CoreFlow</h1>
       </header>
       <div className={styles.wrapper}>
         <div className={styles.imageContainer}></div>
