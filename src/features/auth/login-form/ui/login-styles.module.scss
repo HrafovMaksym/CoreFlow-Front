@@ -33,7 +33,21 @@
     background-color: var(--controlls-bg-hover);
   }
 }
+.forgotPasswordContainer {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.forgotPassword {
+  margin-top: 10px;
 
+  opacity: 0.8;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    opacity: 1;
+  }
+}
 .linkContainer {
   display: flex;
   align-items: center;
@@ -54,7 +68,4 @@
       opacity: 1;
     }
   }
-}
-.error {
-  color: rgb(246, 48, 48);
 }

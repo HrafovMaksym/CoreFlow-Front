@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import styles from "./registration-styles.module.scss";
 
@@ -9,17 +9,38 @@ import { useTranslations } from "next-intl";
 import { RegistrationData } from "@/shared/types/auth";
 import { InputForm } from "@/shared/ui/input-form";
 import { Devider } from "@/shared/ui/devider";
+import { useAppDispatch } from "@/shared/lib/hooks/redux-hook";
+import { registration } from "../../model/auth-slice";
+import { useRouter } from "next/navigation";
 
 const RegistrationForm = () => {
+  const t = useTranslations("RegistrationPage");
+
+  const dispatch = useAppDispatch();
+
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<RegistrationData>();
 
-  const t = useTranslations("RegistrationPage");
+  const [error, setError] = useState("");
 
-  const onSubmit: SubmitHandler<RegistrationData> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<RegistrationData> = async (data) => {
+    try {
+      const result = await dispatch(registration(data)).unwrap();
+      if (result.message === "User created successfully") {
+        router.push("/");
+      } else {
+        throw new Error();
+      }
+    } catch (err: unknown) {
+      const error = err as string;
+      setError(error || t("ErrorGlobalMess"));
+    }
+  };
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -47,15 +68,15 @@ const RegistrationForm = () => {
           register={register("password", { required: t("passwordRequired") })}
           errorType="password"
           errors={errors}
-        />
+        />{" "}
+        {error && <p className={styles.error}>{error}</p>}
         <button className={styles.submit} type="submit">
-          Submit
+          {t("submit")}
         </button>
         <Devider />
-
         <div className={styles.linkContainer}>
-          <span>Already have an account?</span>
-          <Link href={"/login"}>Log In</Link>
+          <span>{t("haveAccount")}</span>
+          <Link href={"/login"}>{t("login")}</Link>
         </div>
       </form>
     </div>
