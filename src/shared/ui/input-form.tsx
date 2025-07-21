@@ -29,7 +29,9 @@ export const InputForm = ({
 
   const isError = Boolean(errors[errorType]);
 
-  const errorMessage = t(String(errors[errorType]?.message));
+  const errorMessage = errors[errorType]?.message;
+
+  const errorT = errorMessage ? t(String(errorMessage)) : "";
 
   return (
     <div className="relative w-full">
@@ -50,9 +52,7 @@ export const InputForm = ({
         </button>
       )}
 
-      <p className="text-red-500 my-2">
-        {isError && <span>{errorMessage}</span>}
-      </p>
+      <p className="text-red-500 my-2">{isError && <span>{errorT}</span>}</p>
     </div>
   );
 };
