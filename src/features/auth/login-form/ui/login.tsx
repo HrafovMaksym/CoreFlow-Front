@@ -51,7 +51,7 @@ const LoginForm = () => {
           label="Email"
           type="email"
           placeholder={t("emailPlaceholder")}
-          register={register("email", { required: t("emailRequired") })}
+          register={register("email")}
           errorType="email"
           errors={errors}
         />
@@ -59,7 +59,7 @@ const LoginForm = () => {
           label="Password"
           type="password"
           placeholder={t("passwordPlaceholder")}
-          register={register("password", { required: t("passwordRequired") })}
+          register={register("password")}
           errorType="password"
           errors={errors}
         />
